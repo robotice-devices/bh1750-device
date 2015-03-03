@@ -24,6 +24,3 @@ def get_data(sensor):
         ('%s.lux' % name, lux, ),
     ]
     return values
-
-
-print outlux
