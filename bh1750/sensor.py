@@ -18,9 +18,9 @@ def get_data(sensor):
     addr = 0x23
     data = bus.read_i2c_block_data(addr,0x11)
     lux2 = str((data[1] + (256 * data[0])) / 1.2)
-    lux = decimal.Decimal(lux2).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_UP)
+#    lux = decimal.Decimal(lux2).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_UP)
  
     values = [
-        ('%s.lux' % name, lux, ),
+        ('%s.lux' % name, lux2, ),
     ]
     return values
