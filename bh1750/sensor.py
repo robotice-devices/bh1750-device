@@ -3,7 +3,6 @@
 import logging
 import time
 import smbus
-import decimal
 
 logger = logging.getLogger("robotice.sensor.bh1750")
 
@@ -13,14 +12,14 @@ def get_data(sensor):
     """
 
     name = sensor.get('name')
+    bus = sensor.get('bus')
 
-    bus = smbus.SMBus(1)
+    bus = smbus.SMBus(int(bus))
     addr = 0x23
     data = bus.read_i2c_block_data(addr,0x11)
-    lux2 = str((data[1] + (256 * data[0])) / 1.2)
-#    lux = decimal.Decimal(lux2).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_UP)
+    lux = str((data[1] + (256 * data[0])) / 1.2)
  
     values = [
-        ('%s.lux' % name, lux2, ),
+        ('%s.luminosity' % name, lux, ),
     ]
     return values
